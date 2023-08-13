@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @author TODO: Ahmed Hossam
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -137,7 +137,12 @@ public class Model extends Observable {
      *  Empty spaces are stored as null.
      * */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
+        // finished
+        for(int i=0;i<b.size();i++){
+            for(int j=0;j<b.size();j++){
+                if(b.tile(i,j)==null)    {return true;}
+            }
+        }
         return false;
     }
 
@@ -148,6 +153,12 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        for(int i=0;i<b.size();i++){
+            for(int j=0;j<b.size();j++){
+                if(b.tile(i,j)==null)   continue;
+                if(b.tile(i,j).value()==MAX_PIECE)  {return true;}
+            }
+        }
         return false;
     }
 
@@ -159,9 +170,26 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        if(Model.emptySpaceExists(b))   return true;
+        else if(Model.checkHorizontal(b) || Model.checkVertical(b))   return true;
+        else    return false;
+    }
+    public static boolean checkHorizontal(Board b){
+        for(int i=0;i<b.size();i++){
+            for(int j=0;j<b.size()-1;j++){
+                if(b.tile(j,i).value()==b.tile(j+1,i).value()) return true;
+            }
+        }
         return false;
     }
-
+    public static boolean checkVertical(Board b){
+        for(int i=0;i<b.size()-1;i++){
+            for(int j=0;j<b.size();j++){
+                if(b.tile(j,i).value()==b.tile(j,i+1).value()) return true;
+            }
+        }
+        return false;
+    }
 
     @Override
      /** Returns the model as a string, used for debugging. */
