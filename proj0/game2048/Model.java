@@ -109,7 +109,14 @@ public class Model extends Observable {
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
-
+        if(side!=Side.NORTH){
+            board.setViewingPerspective(side);
+            changed=this.tiltNorth(changed,Side.NORTH);
+            board.setViewingPerspective(Side.NORTH);
+        }
+        else{
+            changed=this.tiltNorth(changed,Side.NORTH);
+        }
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
@@ -119,6 +126,53 @@ public class Model extends Observable {
             setChanged();
         }
         return changed;
+    }
+
+    private boolean tiltNorth(boolean changed,Side side) {
+        for(int i=0;i< board.size();i++){
+            int count=0;
+            for(int j=3;j>=0;j--){
+                Tile t1=board.tile(i,j);
+                if(t1==null)    {continue;}
+                if(j==3)    continue;
+                int k=this.checkempty(i,j);
+                Tile t2;
+                if(k<0) { t2=null;}
+                else {
+                    t2 = board.tile(i, k);
+                }
+                if(t2==null)   {
+                    board.move(i,3,t1);
+                    changed=true;
+                }
+                else{
+                    if(t2.value()==t1.value() && count==0){
+                        board.move(i,k,t1);
+                        t1=t1.merge(i,k,t2);
+                        count++;
+                        t2=null;
+                        score+=(t1.value());
+                        changed=true;
+                    }
+                    else{
+                        board.move(i,k-1,t1);
+                        changed=true;
+                    }
+                }
+
+            }
+        }
+        return changed;
+    }
+
+    private int checkempty(int i,int j) {
+     for(int k=j+1;k<board.size();k++){
+         Tile t=board.tile(i,k);
+         if(t!=null){
+             return k;
+         }
+     }
+     return -1;
     }
 
     /** Checks if the game is over and sets the gameOver variable
