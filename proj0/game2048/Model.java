@@ -137,7 +137,9 @@ public class Model extends Observable {
                 if(j==3)    continue;
                 int k=this.checkempty(i,j);
                 Tile t2;
-                if(k<0) { t2=null;}
+                if(k<0) {
+                    t2=null;
+                }
                 else {
                     t2 = board.tile(i, k);
                 }
