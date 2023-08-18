@@ -130,7 +130,7 @@ public class Model extends Observable {
 
     private boolean tiltNorth(boolean changed,Side side) {
         for(int i=0;i< board.size();i++){
-            int count=0;
+            Tile[] arr=new Tile[4];
             for(int j=3;j>=0;j--){
                 Tile t1=board.tile(i,j);
                 if(t1==null)    {continue;}
@@ -148,17 +148,33 @@ public class Model extends Observable {
                     changed=true;
                 }
                 else{
-                    if(t2.value()==t1.value() && count==0){
-                        board.move(i,k,t1);
-                        t1=t1.merge(i,k,t2);
-                        count++;
-                        t2=null;
-                        score+=(t1.value());
-                        changed=true;
+                    /*there is a tile merged befpre**/
+                    if(arr[0]!=null) {
+                        if (t2.value() == t1.value() && arr[0].value() != t2.value()) {
+                            board.move(i, k, t1);
+                            t1 = t1.merge(i, k, t2);
+                            arr[0] = t1;
+                            t2 = null;
+                            score += (t1.value());
+                            changed = true;
+                        } else {
+                            board.move(i, k - 1, t1);
+                            changed = true;
+                        }
                     }
+                    /*no tile merged befpre**/
                     else{
-                        board.move(i,k-1,t1);
-                        changed=true;
+                        if (t2.value() == t1.value()) {
+                            board.move(i, k, t1);
+                            t1 = t1.merge(i, k, t2);
+                            arr[0] = t1;
+                            t2 = null;
+                            score += (t1.value());
+                            changed = true;
+                        } else {
+                            board.move(i, k - 1, t1);
+                            changed = true;
+                        }
                     }
                 }
 
