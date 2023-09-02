@@ -131,7 +131,33 @@ public class LinkedListDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
-
-
+    }
+    /*Test for equals function. */
+    @Test
+    public void EqualsTest(){
+        LinkedListDeque<Integer> lll=new LinkedListDeque<>();
+        lll.addFirst(12);
+        lll.addLast(145);
+        lll.addFirst(-9);
+        LinkedListDeque<Integer> lll2=new LinkedListDeque<>();
+        lll2.addFirst(12);
+        lll2.addLast(145);
+        lll2.addFirst(-9);
+        boolean eq1=lll.equals(lll2);
+        boolean eq2=lll.equals(lll2);
+        assertEquals(true,eq1);
+        assertEquals(true,eq2);
+    }
+    /*Test for iteration.*/
+    @Test
+    public void Iterate(){
+        LinkedListDeque<Integer> x=new LinkedListDeque<>();
+        x.addFirst(242);
+        x.addFirst(56);
+        x.addLast(67);
+        for(int i : x){
+            System.out.println(i);
+        }
+        System.out.println(x.getRecursive(2));
     }
 }

@@ -130,7 +130,8 @@ public class LinkedListDeque<Item> implements Iterable<Item> {
     @Override
     public boolean equals(Object o){
         if(this == o)   {return true;}
-        if(o instanceof LinkedListDeque li){
+        if(o instanceof LinkedListDeque ){
+            LinkedListDeque li=(LinkedListDeque) o;
             // return false if both are not same size,
             if(this.size != li.size)    {return false;}
             for(Item i : this){
