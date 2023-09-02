@@ -55,12 +55,8 @@ public class LinkedListDeque<Item> implements Iterable<Item> {
         }
     }
     public boolean isEmpty(){
-        if(sentinel.next==sentinel){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if(size==0) {return true;}
+        return false;
     }
     public int size()   {return size;}
 
