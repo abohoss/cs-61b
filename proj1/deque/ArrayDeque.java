@@ -17,40 +17,45 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         if(size == items.length){
             resize(size*2);
         }
-        items[nextFirst]=x;
-        nextFirst--;
         if(nextFirst<0){
             nextFirst = items.length-1;
         }
+        items[nextFirst]=x;
+        nextFirst--;
         size++;
     }
     public void addLast(Item x){
         if(size == items.length){
             resize(size*2);
         }
-        items[nextLast]=x;
-        nextLast++;
         if(nextLast == items.length){
             nextLast=0;
         }
+        items[nextLast]=x;
+        nextLast++;
         size++;
     }
 
     private void resize(int cap) {
         Item[] a=(Item[]) new Object[cap];
         //difference between index 0 and inner array start value
-        int diff=nextFirst+1;
-        for(int i=diff;i<size;i++){
+        int diff = nextFirst+1;
+        int count=0;
+        for(int i=diff;i<items.length;i++){
+            if(items[i]==null)  {continue;}
             a[i-diff]=items[i];
+            count++;
         }
-        //last item in items[] will be at index size-1-diff in a[] so element after it is at size-diff
+        //
         for(int j=0;j<=nextFirst;j++){
-            a[size-diff+j]=items[j];
+            if(items[j]==null)  {break;}
+            a[count+j]=items[j];
         }
         nextFirst = cap-1;
         nextLast = size;
         items = a;
     }
+
     public int size()   {return size;}
 
     public boolean isEmpty(){
@@ -63,31 +68,28 @@ public class ArrayDeque<Item> implements Iterable<Item> {
     }
 
     public void printDeque(){
-        Item[] a=(Item[]) new Object[items.length];
-        //difference between index 0 and inner array start value
-        int diff=nextFirst+1;
-        for(int i=diff;i<size;i++){
-            a[i-diff]=items[i];
-        }
-        //last item in items[] will be at index size-1-diff in a[] so element after it is at size-diff
-        for(int j=0;j<=nextFirst;j++){
-            a[size-diff+j]=items[j];
-        }
         System.out.print("Items: ");
-        for (Item i : a){
-            System.out.print(i+" ");
+        for(int i=nextFirst+1;i< items.length;i++){
+            if(items[i]==null) {continue;}
+            System.out.print(items[i]+" ");
+        }
+        for(int j=0;j<=nextFirst;j++){
+            if(items[j]==null) {continue;}
+            System.out.print(items[j]+" ");
         }
         System.out.println(" ");
     }
 
     public Item removeFirst(){
-        double R=size/ items.length;
-        if(R < 0.25){
-            resize(size/2);
+        if(size>16){
+            double R=(double)size/ items.length;
+            if(R<0.25){
+                resize(items.length/2);
+            }
         }
+        if(nextFirst== items.length-1)  {nextFirst = -1;}
         Item x=items[nextFirst+1];
         if(x==null) {return null;}
-
         items[nextFirst+1] = null;
         nextFirst++;
         size--;
@@ -95,9 +97,11 @@ public class ArrayDeque<Item> implements Iterable<Item> {
     }
 
     public Item removeLast(){
-        double R=size/ items.length;
-        if(R < 0.25){
-            resize(size/2);
+        if(size>16){
+            double R=(double)size/ items.length;
+            if(R<0.25){
+                resize(items.length/2);
+            }
         }
         Item x=items[nextLast-1];
         if(x==null) {return null;}
@@ -115,6 +119,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
             // return false if both are not same size,
             if(this.size != li.size)    {return false;}
             for(Item i : this){
+                if(i==null) {continue;}
                 if(!li.contains(i))   {return false;}
             }
             return true;
@@ -125,6 +130,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
     /*Iterates over array to see if element is in the list. */
     private boolean contains(Item x){
         for(Item i : this){
+            if(i==null) {continue;}
             if(i.equals(x)) {return true;}
         }
         return false;
@@ -142,7 +148,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         }
         @Override
         public boolean hasNext() {
-            return wizPos < size;
+            return wizPos < items.length;
         }
 
         @Override

@@ -142,9 +142,7 @@ public class ArrayDequeTest {
         lll2.addFirst(12);
         lll2.addLast(145);
         lll2.addFirst(-9);
-        boolean eq1=lll.equals(lll2);
         boolean eq2=lll.equals(lll2);
-        assertEquals(true,eq1);
         assertEquals(true,eq2);
     }
 
@@ -155,7 +153,8 @@ public class ArrayDequeTest {
         x.addFirst(242);
         x.addFirst(56);
         x.addLast(67);
-        for(int i : x){
+        for(Integer i : x){
+            if(i==null) {continue;}
             System.out.println(i);
         }
     }
