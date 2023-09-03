@@ -1,11 +1,11 @@
 package deque;
-
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+
 
 public class ArrayCompTest {
     @Test
@@ -60,4 +60,5 @@ public class ArrayCompTest {
             }
         }
     }
+
 }

@@ -2,8 +2,6 @@ package deque;
 
 import edu.princeton.cs.algs4.Stopwatch;
 
-import java.util.ArrayList;
-
 public class ArrayTimeTest {
     private static void printTimingTable(ArrayDeque<Integer> Ns, ArrayDeque<Double> times, ArrayDeque<Integer> opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
@@ -40,5 +38,6 @@ public class ArrayTimeTest {
         opcount=N;
         printTimingTable(N,time,opcount);
     }
- 
+
+
 }
