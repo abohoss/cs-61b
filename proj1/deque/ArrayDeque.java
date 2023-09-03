@@ -103,6 +103,9 @@ public class ArrayDeque<Item> implements Iterable<Item> {
                 resize(items.length/2);
             }
         }
+        if(nextLast==0){
+            nextLast= items.length;
+        }
         Item x=items[nextLast-1];
         if(x==null) {return null;}
         items[nextLast-1] = null;
