@@ -12,5 +12,7 @@ public class MaxDequeTest {
         m.addFirst(3);
         m.addFirst(-9);
         System.out.println(m.max());
+        System.out.println(m.max(i));
+
     }
 }
