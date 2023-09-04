@@ -153,8 +153,11 @@ public class ArrayDequeTest {
         x.addFirst(242);
         x.addFirst(56);
         x.addLast(67);
+        x.addFirst(78);
+        x.addFirst(2);
+        x.addFirst(5);
+        x.addLast(12);
         for(Integer i : x){
-            if(i==null) {continue;}
             System.out.println(i);
         }
     }

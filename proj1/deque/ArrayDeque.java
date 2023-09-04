@@ -2,17 +2,18 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Item> implements Iterable<Item> {
+public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     private int size;
     private Item items[];
-    private int nextFirst;
-    private int nextLast;
+    protected int nextFirst;
+    protected int nextLast;
     public ArrayDeque(){
         items=(Item[]) new Object[8];
         size=0;
         nextFirst=2;
         nextLast=3;
     }
+    @Override
     public void addFirst(Item x){
         if(size == items.length){
             resize(size*2);
@@ -24,6 +25,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         nextFirst--;
         size++;
     }
+    @Override
     public void addLast(Item x){
         if(size == items.length){
             resize(size*2);
@@ -55,18 +57,13 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         nextLast = size;
         items = a;
     }
-
+    @Override
     public int size()   {return size;}
-
-    public boolean isEmpty(){
-        if(size==0) {return true;}
-        return false;
-    }
-
+    @Override
     public Item get(int index){
         return items[index];
     }
-
+    @Override
     public void printDeque(){
         System.out.print("Items: ");
         for(int i=nextFirst+1;i< items.length;i++){
@@ -79,7 +76,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         }
         System.out.println(" ");
     }
-
+    @Override
     public Item removeFirst(){
         if(size>16){
             double R=(double)size/ items.length;
@@ -95,7 +92,7 @@ public class ArrayDeque<Item> implements Iterable<Item> {
         size--;
         return x;
     }
-
+    @Override
     public Item removeLast(){
         if(size>16){
             double R=(double)size/ items.length;
@@ -146,18 +143,27 @@ public class ArrayDeque<Item> implements Iterable<Item> {
 
     private class ArrayDequeIterator implements Iterator<Item>{
         private int wizPos;
+        private int count;
         public ArrayDequeIterator(){
-            wizPos=0;
+            wizPos=nextFirst+1;
+            count=0;
         }
         @Override
         public boolean hasNext() {
-            return wizPos < items.length;
+            return count < size;
         }
 
         @Override
         public Item next() {
+            if(wizPos== items.length)  {wizPos = 0;}
             Item returnItem = get(wizPos);
+            while(returnItem==null){
+                wizPos++;
+                if(wizPos== items.length)  {wizPos = 0;}
+                returnItem=get(wizPos);
+            }
             wizPos++;
+            count++;
             return returnItem;
         }
     }
