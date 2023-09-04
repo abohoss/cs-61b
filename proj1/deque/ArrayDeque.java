@@ -66,13 +66,8 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     @Override
     public void printDeque(){
         System.out.print("Items: ");
-        for(int i=nextFirst+1;i< items.length;i++){
-            if(items[i]==null) {continue;}
-            System.out.print(items[i]+" ");
-        }
-        for(int j=0;j<=nextFirst;j++){
-            if(items[j]==null) {continue;}
-            System.out.print(items[j]+" ");
+        for(Item i : this){
+            System.out.print(i+" ");
         }
         System.out.println(" ");
     }
