@@ -61,7 +61,16 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     public int size()   {return size;}
     @Override
     public Item get(int index){
-        return items[index];
+        int count=0;
+        Item returnItem = null;
+        for(Item i : this){
+            count++;
+            if(count == index){
+                returnItem=i;
+                break;
+            }
+        }
+        return returnItem;
     }
     @Override
     public void printDeque(){
