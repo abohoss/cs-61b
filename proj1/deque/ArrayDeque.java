@@ -62,13 +62,13 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     @Override
     public Item get(int index){
         int count=0;
-        Item returnItem = null;
+        Item returnItem=items[0];
         for(Item i : this){
-            count++;
             if(count == index){
                 returnItem=i;
                 break;
             }
+            count++;
         }
         return returnItem;
     }
@@ -160,7 +160,7 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
         @Override
         public Item next() {
             if(wizPos== items.length)  {wizPos = 0;}
-            Item returnItem = get(wizPos);
+            Item returnItem = items[wizPos];
             while(returnItem==null){
                 wizPos++;
                 if(wizPos== items.length)  {wizPos = 0;}

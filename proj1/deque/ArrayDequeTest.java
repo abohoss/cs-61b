@@ -161,4 +161,15 @@ public class ArrayDequeTest {
             System.out.println(i);
         }
     }
+    //Test for get()
+    @Test
+    public void getTest(){
+        ArrayDeque<Integer> x=new ArrayDeque<>();
+        x.addLast(23);
+        x.addFirst(1);
+        x.addLast(44);
+        x.addFirst(78);
+        int first=x.get(0);
+        assertEquals(78,first);
+    }
 }
