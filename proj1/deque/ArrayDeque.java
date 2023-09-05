@@ -132,10 +132,14 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     }
 
     /*Iterates over array to see if element is in the list. */
-    private boolean contains(Item x){
+    private boolean contains(Item x) {
         for(Item i : this){
-            if(i==null) {continue;}
-            if(i.equals(x)) {return true;}
+            if(i==null) {
+                continue;
+            }
+            if(i.equals(x)) {
+                return true;
+            }
         }
         return false;
     }
@@ -148,8 +152,8 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
     private class ArrayDequeIterator implements Iterator<Item>{
         private int wizPos;
         private int count;
-        public ArrayDequeIterator(){
-            wizPos=nextFirst+1;
+        public ArrayDequeIterator() {
+            wizPos = nextFirst+1;
             count=0;
         }
         @Override
@@ -161,10 +165,10 @@ public class ArrayDeque<Item> implements Iterable<Item>, Deque<Item>{
         public Item next() {
             if(wizPos== items.length)  {wizPos = 0;}
             Item returnItem = items[wizPos];
-            while(returnItem==null){
+            while(returnItem == null){
                 wizPos++;
                 if(wizPos== items.length)  {wizPos = 0;}
-                returnItem=get(wizPos);
+                returnItem = get(wizPos);
             }
             wizPos++;
             count++;
