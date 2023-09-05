@@ -157,10 +157,15 @@ public class LinkedListDequeTest {
         x.addFirst(242);
         x.addFirst(56);
         x.addLast(67);
+        x.addLast(7);
+        x.addLast(457);
+        x.addLast(22);
+        x.addLast(88);
         for(int i : x){
             System.out.println(i);
         }
         System.out.println(x.getRecursive(2));
+        System.out.println(x.get(0));
     }
 
 

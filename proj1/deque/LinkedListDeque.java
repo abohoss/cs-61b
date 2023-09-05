@@ -64,7 +64,7 @@ public class LinkedListDeque<Item> implements Iterable<Item>,Deque<Item> {
            IntNode p=sentinel.next;
            System.out.print("Items: ");
            while(p != sentinel){
-               System.out.print(p.item+", ");
+               System.out.print(p.item+" ");
                p=p.next;
            }
            System.out.println(" ");
