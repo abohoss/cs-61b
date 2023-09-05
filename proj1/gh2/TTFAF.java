@@ -14,6 +14,7 @@ import java.util.zip.GZIPInputStream;
  */
 public class TTFAF {
     public static void main(String[] args) {
+        /*
         try {
             InputStream source = new ByteArrayInputStream(Base64.getDecoder().decode(TTFAF));
             source = new GZIPInputStream(source);
@@ -22,10 +23,11 @@ public class TTFAF {
         } catch (IOException e) {
             e.printStackTrace();
         }
+         */
 
-        // You can also do this:
-        // GuitarPlayer player = new GuitarPlayer(new java.io.File("path/to/music.mid"));
-        // player.play();
+        // Put a MIDI file here and enjoy ;)
+         GuitarPlayer player = new GuitarPlayer(new java.io.File("C:/Users/Ahmed hosam/Downloads/guitar.mid"));
+         player.play();
     }
 
     private static final String TTFAF =
