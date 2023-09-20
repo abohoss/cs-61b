@@ -7,7 +7,8 @@ import java.util.Set;
 
 public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V>{
 
-    private BSTNode root, leaf;
+    private BSTNode root;
+    private Set<K> keySet = new HashSet<>();
     private class BSTNode{
         private int size;
         private BSTNode left, right;
@@ -70,7 +71,10 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V>{
         root = put(root, key, value);
     }
     private BSTNode put(BSTNode x, K key, V val) {
-        if(x == null)   {return new BSTNode(key, val, 1);}
+        if(x == null)   {
+            keySet.add(key);
+            return new BSTNode(key, val, 1);
+        }
         int cmp=key.compareTo(x.key);
         if(cmp < 0) {x.left=put(x.left, key, val);}
         if(cmp > 0) {x.right=put(x.right, key, val);}
@@ -80,28 +84,7 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V>{
     }
     @Override
     public Set<K> keySet() {
-        Set<K> set = new HashSet<>();
-        return keySet(root,set);
-    }
-    int count = 0;
-
-    private Set<K> keySet(BSTNode x, Set<K> set){
-        if(x == null && count != 0) { return set;}
-        else if(x == null && count == 0) {
-            x = root;
-            count++;
-        }
-        set.add(x.key);
-        if(x.left != null) {
-            set.add(x.left.key);
-        }
-        if(x.right != null) {
-            set.add(x.right.key);
-        }
-        if(count == 0 || x.right == null){
-            return keySet(x.left, set);
-        }
-        return keySet(x.right, set);
+        return keySet;
     }
 
     @Override
@@ -117,5 +100,16 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V>{
     @Override
     public Iterator<K> iterator() {
         throw new UnsupportedOperationException("sorry");
+    }
+    public void printInOrder() {
+        printInOrder(root);
+    }
+    private void printInOrder(BSTNode x) {
+        if(x == null) {
+            return;
+        }
+        printInOrder(x.left);
+        System.out.println("key: " + x.key + " value: " + x.val);
+        printInOrder(x.right);
     }
 }
